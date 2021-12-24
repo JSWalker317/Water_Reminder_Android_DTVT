@@ -1,7 +1,6 @@
 package com.example.waterreminder.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +20,6 @@ import com.example.water.OnItemClickListener;
 import com.example.water.Water;
 import com.example.water.WaterAdapter;
 import com.example.waterreminder.MainActivity;
-import com.example.waterreminder.ProfileActivity;
 import com.example.waterreminder.R;
 
 import java.util.ArrayList;
@@ -41,8 +38,7 @@ public class HomeFragment extends Fragment {
     String weight = "";
     int sumWater = 0;
     public int drink = 0;
-    public static final String MyPREFERENCES = "MyPrefs" ;
-
+    public static final String MyPREFERENCES = "MyPrefs";
 
     @Nullable
     @Override
@@ -54,7 +50,7 @@ public class HomeFragment extends Fragment {
         txtProgress = view.findViewById(R.id.txtProgress);
         progressBar = view.findViewById(R.id.progressBar);
 //
-        SharedPreferences sharedpreferences ;
+        SharedPreferences sharedpreferences;
         sharedpreferences = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
 
@@ -69,7 +65,7 @@ public class HomeFragment extends Fragment {
         rv_water.setLayoutManager(linearLayoutManager);
 
         String divideWater = String.valueOf(sumWater / 8);
-        String divideWaterPlus = String.valueOf(Integer.parseInt(divideWater) + sumWater- Integer.parseInt(divideWater)*8);
+        String divideWaterPlus = String.valueOf(Integer.parseInt(divideWater) + sumWater - Integer.parseInt(divideWater) * 8);
         getList = new ArrayList<>();
         getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 6h00"));
         getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 8h00 "));
@@ -94,7 +90,7 @@ public class HomeFragment extends Fragment {
 
                 if (water.getId() != R.drawable.ic_done) {
                     total = Integer.parseInt(totals[0]) + total;
-                    drink = drink +1;
+                    drink = drink + 1;
 
                     if (total > sumWater) {
                         total = sumWater;
@@ -138,7 +134,6 @@ public class HomeFragment extends Fragment {
                 editor.commit();
 //                Toast.makeText(getActivity(), "Setup Successfull!" , Toast.LENGTH_SHORT).show();
             }
-
         });
 
         rv_water.setAdapter(waterAdapter);

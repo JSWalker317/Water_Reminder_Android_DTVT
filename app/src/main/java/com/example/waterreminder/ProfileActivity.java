@@ -23,13 +23,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         init();
         addListener();
-        reveived_data();
-
 
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         String restoredText = prefs.getString("TAG_NAME", "0");
-//        restoredText =restoredText +"0";
-
         if (!(restoredText.equals("0"))) {
             SharedPreferences sharedpreferences = getSharedPreferences(SAVEPERSONAL, Context.MODE_PRIVATE);
             edt_name.setText(sharedpreferences.getString("TAG_NAME", null));
@@ -37,10 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
             edt_heigh.setText(sharedpreferences.getString("TAG_HEIGH", null));
             edt_weight.setText(sharedpreferences.getString("TAG_WEIGHT", null));
 //            btn_save.performClick();
-
         }
-
-
     }
 
     public void init() {
@@ -66,22 +59,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
-
-    private void reveived_data() {
-        Intent intent = getIntent();
-        String fWeight = intent.getStringExtra("fweight");
-        String fName = intent.getStringExtra("fname");
-        String fAge = intent.getStringExtra("fage");
-        String fHeigh = intent.getStringExtra("fheigh");
-
-        if (fWeight != null && fName != null || fAge != null || fHeigh != null) {
-            edt_name.setText(fName);
-            edt_age.setText(fAge);
-            edt_heigh.setText(fHeigh);
-            edt_weight.setText(fWeight);
-        }
-    }
-
 
     public void addListener() {
         btn_save.setOnClickListener(new View.OnClickListener() {

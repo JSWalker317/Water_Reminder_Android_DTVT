@@ -3,6 +3,7 @@
     package="com.example.waterreminder">
 
     <application
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@drawable/ic_water_reminder"
         android:largeHeap="true"

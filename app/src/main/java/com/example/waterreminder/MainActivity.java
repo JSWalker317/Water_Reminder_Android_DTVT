@@ -16,19 +16,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.waterreminder.fragment.MyProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyProfileFragment.IsenData {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_HISTORY = 1;
     private static final int FRAGMENT_PROFILE = 2;
-
 
     private int mCurrentFragment = FRAGMENT_HOME;
 
@@ -36,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView mBottomNavigationView;
     private ViewPager2 mViewPager2;
     private MyViewPager2Adapter myViewPager2Adapter;
-
     private TextView tv_name_nav;
 
     private String weight = "";
@@ -44,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String heigh = "";
     private String age = "";
     private PendingIntent repeating_pending;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setupViewPager2();
-
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar
                 , R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -64,31 +59,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         reveived_data();
         tv_name_nav.setText(name);
 
-        repeating_pending = PendingIntent.getBroadcast(this,0, new Intent(this, ReceivetingService.class),0);
-
+        repeating_pending = PendingIntent.getBroadcast(this, 0, new Intent(this, ReceivetingService.class), 0);
         notification_daily();
 
     }
-//    notification
+
+    //    notification
     private void notification_daily() {
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Calendar cal = Calendar.getInstance();
 //        cal.set(Calendar.MINUTE,3);
-        cal.set(Calendar.HOUR,1);
-
+        cal.set(Calendar.HOUR, 1);
 //        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY,repeating_pending);
     }
-
-    @Override
-    public void senDataf(String fweight, String fname, String fage, String fheigh) {
-        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-        intent.putExtra("fname", fname);
-        intent.putExtra("fage", fage);
-        intent.putExtra("fheigh", fheigh);
-        intent.putExtra("fweight", fweight);
-        startActivity(intent);
-    }
-
 
     private void reveived_data() {
         Intent intent = getIntent();
@@ -101,8 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         name = mName;
         age = mAge;
         heigh = mHeigh;
-
-
     }
 
     public String getWeight() {
@@ -222,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
 //    private void replaceFragment (Fragment fragment) {
 //        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
 //    }

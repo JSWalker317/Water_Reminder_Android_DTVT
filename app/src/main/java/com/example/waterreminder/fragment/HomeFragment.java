@@ -75,8 +75,6 @@ public class HomeFragment extends Fragment {
         getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 15h00 "));
         getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 17h00 "));
         getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 19h00 "));
-
-
         waterAdapter = new WaterAdapter(getList, new OnItemClickListener() {
             int total = 0;
 
@@ -128,14 +126,12 @@ public class HomeFragment extends Fragment {
                     }).start();
                 }
                 total_water.setText(total + "ml of " + sumWater + "ml");
-
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putString("TAG_NAME", String.valueOf(drink));
                 editor.commit();
 //                Toast.makeText(getActivity(), "Setup Successfull!" , Toast.LENGTH_SHORT).show();
             }
         });
-
         rv_water.setAdapter(waterAdapter);
         return view;
     }

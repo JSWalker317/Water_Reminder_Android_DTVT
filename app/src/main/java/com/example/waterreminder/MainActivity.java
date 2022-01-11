@@ -20,7 +20,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String name = "";
     private String heigh = "";
     private String age = "";
-    private PendingIntent repeating_pending;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +60,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         reveived_data();
         tv_name_nav.setText(name);
 
-        repeating_pending = PendingIntent.getBroadcast(this, 0, new Intent(this, ReceivetingService.class), 0);
-        notification_daily();
-
     }
 
     //    notification
-    private void notification_daily() {
-        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        Calendar cal = Calendar.getInstance();
-//        cal.set(Calendar.MINUTE,3);
-        cal.set(Calendar.HOUR, 1);
-//        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY,repeating_pending);
-    }
+
 
     private void reveived_data() {
         Intent intent = getIntent();

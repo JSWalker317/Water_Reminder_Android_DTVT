@@ -67,14 +67,14 @@ public class HomeFragment extends Fragment {
         String divideWater = String.valueOf(sumWater / 8);
         String divideWaterPlus = String.valueOf(Integer.parseInt(divideWater) + sumWater - Integer.parseInt(divideWater) * 8);
         getList = new ArrayList<>();
-        getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 6h00"));
-        getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 8h00 "));
-        getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 9h00 "));
-        getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 11h00 "));
-        getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWaterPlus + "ml", "Time: 13h00 "));
-        getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 15h00 "));
-        getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 17h00 "));
-        getList.add(new Water(R.drawable.ic_water_reminder, "Tiger", divideWater + "ml", "Time: 19h00 "));
+        getList.add(new Water(R.drawable.ic_water_reminder, "Water", divideWater + "ml", "Time: 6h00"));
+        getList.add(new Water(R.drawable.ic_water_reminder, "Water", divideWater + "ml", "Time: 8h00 "));
+        getList.add(new Water(R.drawable.ic_water_reminder, "Water", divideWater + "ml", "Time: 9h00 "));
+        getList.add(new Water(R.drawable.ic_water_reminder, "Water", divideWater + "ml", "Time: 11h00 "));
+        getList.add(new Water(R.drawable.ic_water_reminder, "Water", divideWaterPlus + "ml", "Time: 13h00 "));
+        getList.add(new Water(R.drawable.ic_water_reminder, "Water", divideWater + "ml", "Time: 15h00 "));
+        getList.add(new Water(R.drawable.ic_water_reminder, "Water", divideWater + "ml", "Time: 17h00 "));
+        getList.add(new Water(R.drawable.ic_water_reminder, "Water", divideWater + "ml", "Time: 19h00 "));
         waterAdapter = new WaterAdapter(getList, new OnItemClickListener() {
             int total = 0;
 

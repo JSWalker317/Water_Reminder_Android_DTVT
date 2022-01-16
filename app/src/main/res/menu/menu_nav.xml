@@ -21,6 +21,13 @@
             <item android:id="@+id/nav_contact"
                 android:title="@string/nav_info"
                 android:icon="@drawable/ic_email"/>
+            <item android:id="@+id/nav_contact1"
+                android:title="18200220 Phan Văn Sơn"
+                android:icon="@drawable/ic_profile"/>
+            <item android:id="@+id/nav_contact2"
+                android:title="18200277 Nguyễn Khắc Tuấn"
+                android:icon="@drawable/ic_profile"/>
         </menu>
     </item>
+
 </menu>

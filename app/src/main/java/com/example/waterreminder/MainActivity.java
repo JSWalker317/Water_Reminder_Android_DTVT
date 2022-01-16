@@ -1,12 +1,18 @@
 package com.example.waterreminder;
 
 import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_HISTORY = 1;
     private static final int FRAGMENT_PROFILE = 2;
+    private static final long milHour = 3600000L;
 
     private int mCurrentFragment = FRAGMENT_HOME;
 
@@ -43,8 +50,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String heigh = "";
     private String age = "";
 
+    private Calendar calendar;
+    private AlarmManager alarmManager;
+    private PendingIntent pendingIntent;
+
+    private Uri mCurrentReminderUri;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -60,9 +77,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         reveived_data();
         tv_name_nav.setText(name);
 
+        // Notification
+        createNotificationChannel();
+
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 1);
+        calendar.set(Calendar.MINUTE,8);
+        calendar.set(Calendar.SECOND,20);
+        calendar.set(Calendar.MILLISECOND,0);
+
+        long selectedTimestamp =  calendar.getTimeInMillis();
+
+        new AlarmScheduler().setRepeatAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri, 60000L);
+
+        setAlarm();
+
+
+        // End notification
+
     }
 
-    //    notification
+    // Methods Notification
+    private void createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "nhom1bReminderChannel";
+            String description = "Channel For ... Manager";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("nhom1bid",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+        }
+
+
+    }
+
+    private void setAlarm() {
+
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(this,AlarmReceiver.class);
+
+        pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY,pendingIntent);
+
+        Toast.makeText(this, "Alarm set Successfully", Toast.LENGTH_SHORT).show();
+
+
+
+    }
+
+    // End Methods Notification
 
 
     private void reveived_data() {
